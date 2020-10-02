@@ -1,0 +1,11 @@
+html {
+  width: 400px;
+}
+
+.header h1 {
+  font-size: 25px;
+}
+
+.header p {
+  font-size: 16px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../vendors/bootstrap-4.5.2-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body class="container p-2 mt-2">
+  <header class="header container">
+    <h1 class="h4">Alert Me</h1>
+    <p class="lead">Notifies when certain keywords are spoken on meet</p>
+  </header>
+
+  <form id="textInput" class="container">
+    <div class="form-group">
+      <label for="customWords">Type your alert keywords (comma separate)</label>
+
+      <div class="row">
+        <div class="col-8">
+          <input type="text" class="form-control" id="customWords" aria-describedby="customWords">
+        </div>
+        <div class="col-4">
+          <button type="submit" class="btn btn-dark">Alert</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <section class="container">
+    <div class="alert alert-danger" role="alert">
+      A simple secondary alert—check it out!
+    </div>
+  </section>
+
+  <footer class="container">
+    <a href="#" class="text-decoration-none text-reset">
+      <p class="font-weight-light" style="font-size: 12px;">&copy; Alert Me
+        <span id="year">H</span>
+      </p>
+    </a>
+  </footer>
+
+  <script src="./popup.js"></script>
+</body>
+
+</html>
