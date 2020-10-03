@@ -13,33 +13,35 @@
 <body class="container p-2 mt-2">
   <header class="header container">
     <h1 class="h4">Alert Me</h1>
-    <p class="lead">Notifies when certain keywords are spoken on meet</p>
+    <p class="lead">Notifies when certain keywords are spoken on meet!</p>
   </header>
 
+  <!-- Change button color on submit (for few seconds) -->
   <form id="textInput" class="container">
     <div class="form-group">
-      <label for="customWords">Type your alert keywords (comma separate)</label>
+      <label for="customWords">Type your alert keywords (comma separated)</label>
 
       <div class="row">
         <div class="col-8">
-          <input type="text" class="form-control" id="customWords" aria-describedby="customWords">
+          <input type="text" id="alert-words" class="form-control" id="customWords" aria-describedby="customWords">
         </div>
         <div class="col-4">
-          <button type="submit" class="btn btn-dark">Alert</button>
+          <button id="alert-btn" type="submit" class="btn btn-dark">Alert</button>
         </div>
       </div>
     </div>
   </form>
 
+  <!-- Change its color and message dynamically (from content) -->
   <section class="container">
     <div class="alert alert-danger" role="alert">
-      A simple secondary alert—check it out!
+      You have not joined your meeting!
     </div>
   </section>
 
   <footer class="container">
     <a href="#" class="text-decoration-none text-reset">
-      <p class="font-weight-light" style="font-size: 12px;">&copy; Alert Me
+      <p class="font-weight-light d-inline-block" style="font-size: 12px;">&copy; Alert Me
         <span id="year">H</span>
       </p>
     </a>

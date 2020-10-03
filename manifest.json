@@ -2,13 +2,19 @@
   "manifest_version": 2,
   "name": "Alert Me",
   "description": "Extension that can save the world",
-  "version": "1.0",
+  "version": "0.1.0",
   "content_scripts": [{
     "matches": ["https://meet.google.com/*"],
-    "js": ["content.js"]
+    "js": ["content.js"],
+    "all_frames": false
   }],
   "browser_action": {
     "default_popup": "./src/popup.html",
     "default_title": "Alert Me"
-  }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["notifications"]
 }
