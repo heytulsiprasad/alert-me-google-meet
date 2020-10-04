@@ -11,6 +11,22 @@ try {
     let ON_CALL = false;
     let IS_SUBTITLE_ON = false;
 
+    // Array of alert words
+    let ALERT_WORDS = [];
+
+    //////////////////////////////////////////////////////////////////
+    // Chrome Message listener
+    //////////////////////////////////////////////////////////////////
+    chrome.runtime.onMessage.addListener(function (
+      request,
+      sender,
+      sendResponse
+    ) {
+      if (request.alertWords) {
+        ALERT_WORDS = request.alertWords;
+      }
+    });
+
     ////////////////////////////////////////////////////////////////////////////
     // Global Observer
     ////////////////////////////////////////////////////////////////////////////
@@ -21,7 +37,6 @@ try {
         // Remove observer
         docObserver.disconnect();
 
-        console.log("docObserver changes");
         callStarts();
       }
     });
@@ -43,8 +58,6 @@ try {
         IS_SUBTITLE_ON = subtitleDiv.style.display === "none" ? false : true;
         if (IS_SUBTITLE_ON) whenSubtitleOn();
         else whenSubtitleOff();
-
-        console.log("subtitle Observer");
       });
 
       subtitleObserver.observe(subtitleDiv, {
@@ -96,25 +109,26 @@ try {
                   );
 
               // Match with input got from browser
-              let msg = "Awesome".toLowerCase();
-
               let lwrSpeech = speech.toLowerCase();
-              if (lwrSpeech.includes(msg)) {
-                // console.log({ speaker, photo, speech });
 
-                // Send notifications
+              for (let i = 0; i < ALERT_WORDS.length; i++) {
+                if (lwrSpeech.indexOf(ALERT_WORDS[i]) !== -1) {
+                  console.log({ speaker, photo, speech });
 
-                toDataURL(photo).then((base64Link) => {
-                  chrome.runtime.sendMessage("", {
-                    type: "notification",
-                    options: {
-                      title: "Alert — from Google Meet",
-                      message: `${speaker} just said ${speech}`,
-                      iconUrl: base64Link,
-                      type: "basic",
-                    },
+                  // Send notifications
+
+                  toDataURL(photo).then((base64Link) => {
+                    chrome.runtime.sendMessage("", {
+                      type: "notification",
+                      options: {
+                        title: "Alert — from Google Meet",
+                        message: `${speaker} just said ${speech}`,
+                        iconUrl: base64Link,
+                        type: "basic",
+                      },
+                    });
                   });
-                });
+                }
               }
 
               // console.log(`${speaker} said ${speech}`);

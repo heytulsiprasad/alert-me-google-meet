@@ -4,49 +4,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Alert Me — Google Meet</title>
 
-  <link rel="stylesheet" href="../vendors/bootstrap-4.5.2-dist/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    .material-icons.remove {
+      color: black;
+      font-size: 14px;
+      line-height: inherit;
+      margin-right: 5px;
+      border-radius: 10px;
+      transition: background-color 0.1s ease-in-out;
+    }
+
+    .material-icons.remove:hover {
+      cursor: pointer;
+      font-weight: bolder;
+    }
+  </style>
 </head>
 
-<body class="container p-2 mt-2">
-  <header class="header container">
-    <h1 class="h4">Alert Me</h1>
-    <p class="lead">Notifies when certain keywords are spoken on meet!</p>
+<body class="body">
+  <header class="header">
+    <h1 class="header__title">Alert Me</h1>
+    <h2 class="header__lead">Notify on certain texts being spoken in the meeting</h2>
   </header>
 
-  <!-- Change button color on submit (for few seconds) -->
-  <form id="textInput" class="container">
-    <div class="form-group">
-      <label for="customWords">Type your alert keywords (comma separated)</label>
-
-      <div class="row">
-        <div class="col-8">
-          <input type="text" id="alert-words" class="form-control" id="customWords" aria-describedby="customWords">
+  <main class="main">
+    <section class="words">
+      <h1 class="words__title">Your Words</h1>
+      <div class="words__boxes">
+        <div class="words__box">
+          <span class="material-icons remove">clear</span>
+          <p>Software</p>
         </div>
-        <div class="col-4">
-          <button id="alert-btn" type="submit" class="btn btn-dark">Alert</button>
+        <div class="words__box">
+          <span class="material-icons remove">clear</span>
+          <p>Attendance</p>
         </div>
       </div>
-    </div>
-  </form>
+    </section>
 
-  <!-- Change its color and message dynamically (from content) -->
-  <section class="container">
-    <div class="alert alert-danger" role="alert">
-      You have not joined your meeting!
-    </div>
-  </section>
+    <section class="create">
+      <form class="create__form">
+        <input type="text" class="create__input" id="alert-words customWords" placeholder="Type your keywords..."
+          aria-describedby="customWords">
+        <button id="add-btn" class="create__btn" type="submit">Add</button>
+      </form>
+    </section>
+  </main>
 
-  <footer class="container">
-    <a href="#" class="text-decoration-none text-reset">
-      <p class="font-weight-light d-inline-block" style="font-size: 12px;">&copy; Alert Me
-        <span id="year">H</span>
-      </p>
-    </a>
+  <footer class="footer">
+    <div class="footer__status">
+      <div class="footer__status--btn"></div>
+      <div class="footer__status--msg">Captions are turned off</div>
+    </div>
   </footer>
-
   <script src="./popup.js"></script>
 </body>
 
