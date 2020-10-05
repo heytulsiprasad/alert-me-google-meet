@@ -79,18 +79,20 @@
     const alertWordsDoc = document.getElementById("alert-words");
     const alertWords = alertWordsDoc.value.split(",").map((str) => str.trim());
 
-    // Add them to DOM
-    addWords(alertWords);
+    if (!alertWords.includes("")) {
+      // Add them to DOM
+      addWords(alertWords);
 
-    // Remove from input box
-    alertWordsDoc.value = "";
+      // Remove from input box
+      alertWordsDoc.value = "";
 
-    const displayedWords = [...document.querySelectorAll(".word__ele")].map(
-      (i) => i.innerText
-    );
+      const displayedWords = [...document.querySelectorAll(".word__ele")].map(
+        (i) => i.innerText
+      );
 
-    // Save to local storage
-    saveToLocalStorage(displayedWords);
+      // Save to local storage
+      saveToLocalStorage(displayedWords);
+    }
   });
 
   const saveToLocalStorage = (displayedWords) => {
