@@ -1,18 +1,88 @@
 (() => {
-  // TODO: Attach event listener to local storage to update your words
+  ////////////////////////////////////////////////////////////////////////////
+  // Constants
+  ////////////////////////////////////////////////////////////////////////////
 
+  const bgSuccess = "#6ae97063";
+  const bgInfo = "#cce5ff61";
+  const bgWarning = "#fdff8159";
+  const bgDanger = "#ff8c8c73";
+
+  // Handle errors
+  const footerDiv = document.querySelector("footer.footer");
+  const footerMsg = document.getElementById("alert-msg");
+
+  chrome.storage.sync.get(["details"], (data) => {
+    const log = data.details.options;
+
+    switch (log.status) {
+      case "success":
+        footerDiv.style.backgroundColor = bgSuccess;
+        footerMsg.innerText = log.message;
+        break;
+      case "warning":
+        footerDiv.style.backgroundColor = bgWarning;
+        footerMsg.innerText = log.message;
+        break;
+      case "info":
+        footerDiv.style.backgroundColor = bgInfo;
+        footerMsg.innerText = log.message;
+        break;
+      case "danger":
+        footerDiv.style.backgroundColor = bgDanger;
+        footerMsg.innerText = log.message;
+        break;
+      default:
+        footerDiv.style.backgroundColor = bgInfo;
+    }
+  });
+
+  chrome.storage.onChanged.addListener((changes, namespace) => {
+    if (changes.details && changes.details.newValue.type === "log") {
+      const log = changes.details.newValue.options;
+
+      switch (log.status) {
+        case "success":
+          footerDiv.style.backgroundColor = bgSuccess;
+          footerMsg.innerText = log.message;
+          break;
+        case "warning":
+          footerDiv.style.backgroundColor = bgWarning;
+          footerMsg.innerText = log.message;
+          break;
+        case "info":
+          footerDiv.style.backgroundColor = bgInfo;
+          footerMsg.innerText = log.message;
+          break;
+        case "danger":
+          footerDiv.style.backgroundColor = bgDanger;
+          footerMsg.innerText = log.message;
+          break;
+        default:
+          footerDiv.style.backgroundColor = bgInfo;
+      }
+      // warning // success
+    }
+
+    // ref: https://stackoverflow.com/a/20077854/11674552
+    return true;
+  });
+
+  // Attach event listener to local storage to update your words
   // Send changed localstorage data to content.js
   chrome.storage.onChanged.addListener((changes, namespace) => {
-    const alertWords = changes.alertWords.newValue;
-    chrome.tabs.query(
-      {
-        active: true,
-        currentWindow: true,
-      },
-      (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, { alertWords });
-      }
-    );
+    if (changes.alertWords) {
+      const alertWords = changes.alertWords.newValue;
+      chrome.tabs.query(
+        {
+          active: true,
+          currentWindow: true,
+        },
+        (tabs) => {
+          chrome.tabs.sendMessage(tabs[0].id, { alertWords });
+        }
+      );
+    }
   });
 
   // This Adds Words to The DOM

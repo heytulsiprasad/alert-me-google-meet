@@ -31,6 +31,17 @@ try {
       }
     });
 
+    // Set status message
+    chrome.storage.sync.set({
+      details: {
+        type: "log",
+        options: {
+          status: "danger",
+          message: "Not on call",
+        },
+      },
+    });
+
     ////////////////////////////////////////////////////////////////////////////
     // Global Observer
     ////////////////////////////////////////////////////////////////////////////
@@ -40,6 +51,17 @@ try {
         ON_CALL = true;
         // Remove observer
         docObserver.disconnect();
+
+        console.log("success - In a call");
+        chrome.storage.sync.set({
+          details: {
+            type: "log",
+            options: {
+              status: "success",
+              message: "You're in a call, add your keywords",
+            },
+          },
+        });
 
         callStarts();
       }
@@ -73,13 +95,33 @@ try {
 
     const whenSubtitleOff = () => {
       console.log("Captions turned off");
+
+      chrome.storage.sync.set({
+        details: {
+          type: "log",
+          options: {
+            status: "warning",
+            message: "Turn on your captions",
+          },
+        },
+      });
     };
 
     // -------------------------------------------------------------------------
     // Invoke when subtitles are on (MAIN FUNCTIONALITY)
     // -------------------------------------------------------------------------
     const whenSubtitleOn = () => {
-      // console.log("Captions turned on");
+      console.log("Captions turned on");
+
+      chrome.storage.sync.set({
+        details: {
+          type: "log",
+          options: {
+            status: "success",
+            message: "You're all set, add your keywords and relax",
+          },
+        },
+      });
 
       const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
       const subtitleObserver = new MutationObserver((mutations) => {
@@ -115,15 +157,23 @@ try {
               // Match with input got from browser
               let lwrSpeech = speech.toLowerCase();
 
-              // console.log(ALERT_WORDS);
-
               for (let i = 0; i < ALERT_WORDS.length; i++) {
                 if (lwrSpeech.indexOf(ALERT_WORDS[i]) !== -1) {
-                  console.log({ speaker, photo, speech });
+                  // console.log(`${speaker} said ${speech}`);
 
                   // Send notifications
 
                   toDataURL(photo).then((base64Link) => {
+                    chrome.storage.sync.set({
+                      details: {
+                        type: "log",
+                        options: {
+                          status: "info",
+                          message: "You were just notified",
+                        },
+                      },
+                    });
+
                     chrome.runtime.sendMessage("", {
                       type: "notification",
                       options: {
@@ -136,8 +186,6 @@ try {
                   });
                 }
               }
-
-              // console.log(`${speaker} said ${speech}`);
             }
           });
         });
