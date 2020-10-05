@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alert Me — Google Meet</title>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
 
   <style>
@@ -30,28 +30,21 @@
 <body class="body">
   <header class="header">
     <h1 class="header__title">Alert Me</h1>
-    <h2 class="header__lead">Notify on certain texts being spoken in the meeting</h2>
+    <h2 class="header__lead">
+      Notify on certain texts being spoken in the meeting
+    </h2>
   </header>
 
   <main class="main">
     <section class="words">
       <h1 class="words__title">Your Words</h1>
-      <div class="words__boxes">
-        <div class="words__box">
-          <span class="material-icons remove">clear</span>
-          <p>Software</p>
-        </div>
-        <div class="words__box">
-          <span class="material-icons remove">clear</span>
-          <p>Attendance</p>
-        </div>
-      </div>
+      <div class="words__boxes"></div>
     </section>
 
     <section class="create">
-      <form class="create__form">
-        <input type="text" class="create__input" id="alert-words customWords" placeholder="Type your keywords..."
-          aria-describedby="customWords">
+      <form autocomplete="off" class="create__form">
+        <input type="text" class="create__input" id="alert-words" placeholder="Type your keywords..."
+          aria-describedby="alert-words" />
         <button id="add-btn" class="create__btn" type="submit">Add</button>
       </form>
     </section>

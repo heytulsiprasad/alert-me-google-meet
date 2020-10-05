@@ -23,7 +23,11 @@ try {
       sendResponse
     ) {
       if (request.alertWords) {
-        ALERT_WORDS = request.alertWords;
+        const lwrAlertWords = request.alertWords.map((str) =>
+          str.toLowerCase()
+        );
+        ALERT_WORDS = lwrAlertWords;
+        console.log(ALERT_WORDS);
       }
     });
 
@@ -110,6 +114,8 @@ try {
 
               // Match with input got from browser
               let lwrSpeech = speech.toLowerCase();
+
+              // console.log(ALERT_WORDS);
 
               for (let i = 0; i < ALERT_WORDS.length; i++) {
                 if (lwrSpeech.indexOf(ALERT_WORDS[i]) !== -1) {
