@@ -68,30 +68,11 @@
     return true;
   });
 
-  // Attach event listener to local storage to update your words
-  // Send changed localstorage data to content.js
-  chrome.storage.onChanged.addListener((changes, namespace) => {
-    if (changes.alertWords) {
-      const alertWords = changes.alertWords.newValue;
-      chrome.tabs.query(
-        {
-          active: true,
-          currentWindow: true,
-        },
-        (tabs) => {
-          chrome.tabs.sendMessage(tabs[0].id, { alertWords });
-        }
-      );
-    }
-  });
-
   // This Adds Words to The DOM
   const addWords = (wordsArray) => {
     const displayedWords = [
       ...document.querySelectorAll(".word__ele"),
     ].map((i) => i.innerText.toLowerCase());
-
-    // console.log(wordsArray, displayedWords);
 
     for (let j = 0; j < wordsArray.length; j++) {
       // Checks if not already exists
@@ -115,9 +96,7 @@
               alertWords.splice(idx, 1);
             }
 
-            chrome.storage.sync.set({ alertWords }, () => {
-              console.log("Deleted!");
-            });
+            chrome.storage.sync.set({ alertWords });
           });
         });
 
@@ -166,9 +145,7 @@
   });
 
   const saveToLocalStorage = (displayedWords) => {
-    chrome.storage.sync.set({ alertWords: displayedWords }, () => {
-      console.log("Saved!");
-    });
+    chrome.storage.sync.set({ alertWords: displayedWords });
   };
 
   document.querySelector("form").addEventListener("submit", (e) => {

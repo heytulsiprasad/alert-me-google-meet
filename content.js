@@ -14,20 +14,18 @@ try {
     // Array of alert words
     let ALERT_WORDS = [];
 
-    //////////////////////////////////////////////////////////////////
-    // Chrome Message listener
-    //////////////////////////////////////////////////////////////////
-    chrome.runtime.onMessage.addListener(function (
-      request,
-      sender,
-      sendResponse
-    ) {
-      if (request.alertWords) {
-        const lwrAlertWords = request.alertWords.map((str) =>
-          str.toLowerCase()
-        );
+    chrome.storage.sync.get(["alertWords"], (data) => {
+      const alertWords = data.alertWords;
+      const lwrAlertWords = alertWords.map((str) => str.toLowerCase());
+      ALERT_WORDS = lwrAlertWords;
+    });
+
+    chrome.storage.onChanged.addListener((changes, namespace) => {
+      if (changes.alertWords) {
+        const alertWords = changes.alertWords.newValue;
+
+        const lwrAlertWords = alertWords.map((str) => str.toLowerCase());
         ALERT_WORDS = lwrAlertWords;
-        console.log(ALERT_WORDS);
       }
     });
 
@@ -52,7 +50,6 @@ try {
         // Remove observer
         docObserver.disconnect();
 
-        console.log("success - In a call");
         chrome.storage.sync.set({
           details: {
             type: "log",
@@ -94,8 +91,6 @@ try {
     };
 
     const whenSubtitleOff = () => {
-      console.log("Captions turned off");
-
       chrome.storage.sync.set({
         details: {
           type: "log",
@@ -111,8 +106,6 @@ try {
     // Invoke when subtitles are on (MAIN FUNCTIONALITY)
     // -------------------------------------------------------------------------
     const whenSubtitleOn = () => {
-      console.log("Captions turned on");
-
       chrome.storage.sync.set({
         details: {
           type: "log",
@@ -126,8 +119,6 @@ try {
       const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
       const subtitleObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
-          // console.log(mutation);
-
           const newNodes = mutation.addedNodes;
           newNodes.forEach((node) => {
             if (node.classList && node.classList.contains("CNusmb")) {
@@ -159,8 +150,6 @@ try {
 
               for (let i = 0; i < ALERT_WORDS.length; i++) {
                 if (lwrSpeech.indexOf(ALERT_WORDS[i]) !== -1) {
-                  // console.log(`${speaker} said ${speech}`);
-
                   // Send notifications
 
                   toDataURL(photo).then((base64Link) => {
@@ -184,6 +173,17 @@ try {
                       },
                     });
                   });
+
+                  // Reduces the number of mutations (silents the observer for 5 seconds)
+                  subtitleObserver.disconnect();
+                  setTimeout(() => {
+                    subtitleObserver.observe(subtitleDiv, {
+                      childList: true,
+                      subtree: true,
+                      attributes: false,
+                      characterData: false,
+                    });
+                  }, 5000);
                 }
               }
             }
@@ -200,5 +200,5 @@ try {
     };
   })();
 } catch (e) {
-  console.log("init error", e);
+  console.error("init error", e);
 }
