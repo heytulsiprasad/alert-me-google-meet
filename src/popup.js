@@ -14,27 +14,29 @@
 
   // Show pre-existing status
   chrome.storage.sync.get(["details"], (data) => {
-    const log = data.details.options;
+    if (data.details) {
+      const log = data.details.options;
 
-    switch (log.status) {
-      case "success":
-        footerDiv.style.backgroundColor = bgSuccess;
-        footerMsg.innerText = log.message;
-        break;
-      case "warning":
-        footerDiv.style.backgroundColor = bgWarning;
-        footerMsg.innerText = log.message;
-        break;
-      case "info":
-        footerDiv.style.backgroundColor = bgInfo;
-        footerMsg.innerText = log.message;
-        break;
-      case "danger":
-        footerDiv.style.backgroundColor = bgDanger;
-        footerMsg.innerText = log.message;
-        break;
-      default:
-        footerDiv.style.backgroundColor = bgInfo;
+      switch (log.status) {
+        case "success":
+          footerDiv.style.backgroundColor = bgSuccess;
+          footerMsg.innerText = log.message;
+          break;
+        case "warning":
+          footerDiv.style.backgroundColor = bgWarning;
+          footerMsg.innerText = log.message;
+          break;
+        case "info":
+          footerDiv.style.backgroundColor = bgInfo;
+          footerMsg.innerText = log.message;
+          break;
+        case "danger":
+          footerDiv.style.backgroundColor = bgDanger;
+          footerMsg.innerText = log.message;
+          break;
+        default:
+          footerDiv.style.backgroundColor = bgInfo;
+      }
     }
   });
 
@@ -118,7 +120,7 @@
     const alertWords = data.alertWords;
 
     // Add to DOM
-    addWords(alertWords);
+    if (alertWords) addWords(alertWords);
   });
 
   const addBtn = document.getElementById("add-btn");
