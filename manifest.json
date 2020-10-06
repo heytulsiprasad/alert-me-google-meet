@@ -16,5 +16,10 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+  "icons": {
+    "16": "images/bell16.png",
+    "48": "images/bell48.png",
+    "128": "images/bell16.png"
+  },
   "permissions": ["notifications", "storage"]
 }
