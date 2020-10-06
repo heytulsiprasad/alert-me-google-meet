@@ -30,9 +30,11 @@ try {
 
     // Gets pre-saved words upon start
     chrome.storage.sync.get(["alertWords"], (data) => {
-      const alertWords = data.alertWords;
-      const lwrAlertWords = alertWords.map((str) => str.toLowerCase());
-      ALERT_WORDS = lwrAlertWords;
+      if (data.alertWords) {
+        const alertWords = data.alertWords;
+        const lwrAlertWords = alertWords.map((str) => str.toLowerCase());
+        ALERT_WORDS = lwrAlertWords;
+      }
     });
 
     // Listens to further changes in sync storage
