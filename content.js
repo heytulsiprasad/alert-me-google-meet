@@ -2,6 +2,17 @@ console.log("[alert-me-google-meet] loaded");
 
 try {
   (() => {
+    // Show status on start
+    chrome.storage.sync.set({
+      details: {
+        type: "log",
+        options: {
+          status: "danger",
+          message: "Not on call",
+        },
+      },
+    });
+
     ////////////////////////////////////////////////////////////////////////////
     // State Variables
     ////////////////////////////////////////////////////////////////////////////
@@ -11,15 +22,20 @@ try {
     let ON_CALL = false;
     let IS_SUBTITLE_ON = false;
 
-    // Array of alert words
+    ////////////////////////////////////////////////////////////////////////////
+    // Getting Alert Words
+    ////////////////////////////////////////////////////////////////////////////
+
     let ALERT_WORDS = [];
 
+    // Gets pre-saved words upon start
     chrome.storage.sync.get(["alertWords"], (data) => {
       const alertWords = data.alertWords;
       const lwrAlertWords = alertWords.map((str) => str.toLowerCase());
       ALERT_WORDS = lwrAlertWords;
     });
 
+    // Listens to further changes in sync storage
     chrome.storage.onChanged.addListener((changes, namespace) => {
       if (changes.alertWords) {
         const alertWords = changes.alertWords.newValue;
@@ -27,17 +43,6 @@ try {
         const lwrAlertWords = alertWords.map((str) => str.toLowerCase());
         ALERT_WORDS = lwrAlertWords;
       }
-    });
-
-    // Set status message
-    chrome.storage.sync.set({
-      details: {
-        type: "log",
-        options: {
-          status: "danger",
-          message: "Not on call",
-        },
-      },
     });
 
     ////////////////////////////////////////////////////////////////////////////
@@ -90,6 +95,9 @@ try {
       });
     };
 
+    // -------------------------------------------------------------------------
+    // Invoke when subs are off
+    // -------------------------------------------------------------------------
     const whenSubtitleOff = () => {
       chrome.storage.sync.set({
         details: {
@@ -103,7 +111,7 @@ try {
     };
 
     // -------------------------------------------------------------------------
-    // Invoke when subtitles are on (MAIN FUNCTIONALITY)
+    // Invoke when subs are on (MAIN FUNCTIONALITY)
     // -------------------------------------------------------------------------
     const whenSubtitleOn = () => {
       chrome.storage.sync.set({
@@ -116,10 +124,13 @@ try {
         },
       });
 
+      // DOM element containing all subtitles
       const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
+
       const subtitleObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           const newNodes = mutation.addedNodes;
+
           newNodes.forEach((node) => {
             if (node.classList && node.classList.contains("CNusmb")) {
               const speaker = node.parentNode.parentNode.parentNode.parentNode.querySelector(
@@ -130,8 +141,8 @@ try {
                 .getAttribute("src");
               const speech = node.textContent;
 
-              // Get image base64
-              // https://stackoverflow.com/a/20285053/11674552
+              // Get image base64 from url
+              // ref: https://stackoverflow.com/a/20285053/11674552
               const toDataURL = (url) =>
                 fetch(url)
                   .then((response) => response.blob())
@@ -145,24 +156,26 @@ try {
                       })
                   );
 
-              // Match with input got from browser
+              // -------------------------------------------------------------------------
+              // Check for matches
+              // -------------------------------------------------------------------------
               let lwrSpeech = speech.toLowerCase();
 
               for (let i = 0; i < ALERT_WORDS.length; i++) {
                 if (lwrSpeech.indexOf(ALERT_WORDS[i]) !== -1) {
-                  // Send notifications
-
                   toDataURL(photo).then((base64Link) => {
                     chrome.storage.sync.set({
                       details: {
                         type: "log",
                         options: {
                           status: "info",
-                          message: "You were just notified",
+                          message:
+                            "You were notified. Check your notifications",
                         },
                       },
                     });
 
+                    // Send notif alert to background.js
                     chrome.runtime.sendMessage("", {
                       type: "notification",
                       options: {
@@ -174,7 +187,8 @@ try {
                     });
                   });
 
-                  // Reduces the number of mutations (silents the observer for 5 seconds)
+                  // Reduces the number of mutations
+                  // (silents the observer for 5 seconds)
                   subtitleObserver.disconnect();
                   setTimeout(() => {
                     subtitleObserver.observe(subtitleDiv, {
@@ -183,7 +197,7 @@ try {
                       attributes: false,
                       characterData: false,
                     });
-                  }, 5000);
+                  }, 3000);
                 }
               }
             }
@@ -191,6 +205,7 @@ try {
         });
       });
 
+      // Start observing subtitle div
       subtitleObserver.observe(subtitleDiv, {
         childList: true,
         subtree: true,

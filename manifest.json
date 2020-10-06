@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Alert Me",
-  "description": "Extension that can save the world",
+  "name": "Alert Me - Google Meet",
+  "description": "Notify on certain texts being spoken in a meeting",
   "version": "0.1.0",
   "content_scripts": [{
     "matches": ["https://meet.google.com/*"],
@@ -10,7 +10,7 @@
   }],
   "browser_action": {
     "default_popup": "./src/popup.html",
-    "default_title": "Alert Me"
+    "default_title": "Alert Me - Google Meet"
   },
   "background": {
     "scripts": ["background.js"],

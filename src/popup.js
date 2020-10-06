@@ -8,10 +8,11 @@
   const bgWarning = "#fdff8159";
   const bgDanger = "#ff8c8c73";
 
-  // Handle errors
+  // Status DOM elements
   const footerDiv = document.querySelector("footer.footer");
   const footerMsg = document.getElementById("alert-msg");
 
+  // Show pre-existing status
   chrome.storage.sync.get(["details"], (data) => {
     const log = data.details.options;
 
@@ -37,7 +38,8 @@
     }
   });
 
-  chrome.storage.onChanged.addListener((changes, namespace) => {
+  // Listen upcoming status from content.js
+  chrome.storage.onChanged.addListener((changes) => {
     if (changes.details && changes.details.newValue.type === "log") {
       const log = changes.details.newValue.options;
 
@@ -61,14 +63,13 @@
         default:
           footerDiv.style.backgroundColor = bgInfo;
       }
-      // warning // success
     }
 
     // ref: https://stackoverflow.com/a/20077854/11674552
     return true;
   });
 
-  // This Adds Words to The DOM
+  // This Adds Words to The DOM (called from addBtn listener)
   const addWords = (wordsArray) => {
     const displayedWords = [
       ...document.querySelectorAll(".word__ele"),
@@ -106,14 +107,13 @@
 
         wordBox.append(crossIcon, pTag);
 
-        // Append to document
         const parentBox = document.querySelector(".words__boxes");
         parentBox.appendChild(wordBox);
       }
     }
   };
 
-  // Get previously stored data
+  // Get pre-existing alert words
   chrome.storage.sync.get(["alertWords"], (data) => {
     const alertWords = data.alertWords;
 
@@ -121,9 +121,9 @@
     addWords(alertWords);
   });
 
-  // ADD Words Event Listener
   const addBtn = document.getElementById("add-btn");
 
+  // Add Button Event Listener
   addBtn.addEventListener("click", () => {
     const alertWordsDoc = document.getElementById("alert-words");
     const alertWords = alertWordsDoc.value.split(",").map((str) => str.trim());
@@ -144,6 +144,7 @@
     }
   });
 
+  // Saves to sync storage, called from addBtn event listener
   const saveToLocalStorage = (displayedWords) => {
     chrome.storage.sync.set({ alertWords: displayedWords });
   };
