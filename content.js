@@ -135,12 +135,12 @@ try {
 
           newNodes.forEach((node) => {
             if (node.classList && node.classList.contains("CNusmb")) {
-              const speaker = node.parentNode.parentNode.parentNode.parentNode.querySelector(
+              const speaker = node?.parentNode?.parentNode?.parentNode?.parentNode?.querySelector(
                 ".zs7s8d.jxFHg"
-              ).textContent;
-              const photo = node.parentNode.parentNode.parentNode.parentNode
-                .querySelector(".KpxDtd.r6DyN")
-                .getAttribute("src");
+              )?.textContent;
+              const photo = node?.parentNode?.parentNode?.parentNode?.parentNode
+                ?.querySelector(".KpxDtd.r6DyN")
+                ?.getAttribute("src");
               const speech = node.textContent;
 
               // Get image base64 from url
