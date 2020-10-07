@@ -12,7 +12,7 @@
   <img alt="License" src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
 </a>
 
-<br>
+</br>
 
 A Chrome Extension that notifies people when certain words are being spoken in a Google Meet Meeting opened in Chrome browser. You can set the alert words yourself with your name or any word you want to be notified for. Use it to your own advantage.
 
@@ -65,8 +65,7 @@ It's pretty simple, feel free to follow below steps if you get stuck:
 
 ## Contributions
 
-You can contribute to this project by solving existing issues or adding a new feature.
-Create an [Issue](https://github.com/heytulsiprasad/alert-me-google-meet/issues) to discuss about it.
+You can contribute to this project by solving existing issues or adding a new feature. Create an [Issue](https://github.com/heytulsiprasad/alert-me-google-meet/issues) to discuss.
 
 ## License
 
