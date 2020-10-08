@@ -16,7 +16,7 @@
 
 A Chrome Extension that notifies people when certain words are being spoken in a Google Meet Meeting opened in Chrome browser. You can set the alert words yourself with your name or any word you want to be notified for. Use it to your own advantage.
 
-:warning: The app is in `v0.1.0-alpha` now, so feel free test it and create some issues so we can make it bulletproof before publishing on the chrome store.
+:warning: The app is in `v0.2.0-beta` now, so feel free test it and create some issues so we can make it bulletproof before publishing on the chrome store.
 
 </br>
 <img src="https://i.imgur.com/7EjDcuR.png" alt="Success Home Popup" />
@@ -36,9 +36,9 @@ I'll also have to submit it for verification to chrome web store so let's say gi
 
 Absolutely. I'd love you to do it. I'll share steps how you can install this now. Make sure to create issues if you come across any bugs, its always better to discuss tech in public.
 
-## How to install the alpha version?
+## How to install the latest version?
 
-First off, download `alert-me-v0.1.0.zip` asset from the [releases](https://github.com/heytulsiprasad/alert-me-google-meet/releases/tag/v0.1.0-alpha) section.
+First off, download `alert-me-v0.1.0.zip` asset from the [releases](https://github.com/heytulsiprasad/alert-me-google-meet/releases) section.
 
 Once downloaded, unzip the file and open Google Chrome. You can go inside **Menu > More Tools > Extensions** or visit `chrome://extensions`. Then toggle the **Developer Mode** button.
 
