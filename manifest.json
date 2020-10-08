@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Alert Me - Google Meet",
   "description": "Notify when certain words are being spoken in a meeting, your friendly reminder!",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "content_scripts": [{
     "matches": ["https://meet.google.com/*"],
     "js": ["content.js"],
