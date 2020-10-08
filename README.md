@@ -16,15 +16,27 @@
 
 A Chrome Extension that notifies people when certain words are being spoken in a Google Meet Meeting opened in Chrome browser. You can set the alert words yourself with your name or any word you want to be notified for. Use it to your own advantage.
 
+**This doesn't recognize the voice in the meeting by itself, that's done by Google when you turn your captions on, so if it doesn't work as shown here, try checking if your voice is recognized by Google**.
+
+</br>
+<p align="center">
+<img src="https://i.imgur.com/7EjDcuR.png" alt="Success Home Popup" />
+<p align="center">Popup interface to add/remove alert words</p>
+</p>
+</br>
+
+</br>
+<p align="center">
+<img src="https://i.imgur.com/l64QxGH.png" alt="Notifications in Windows" />
+<p align="center">Notifications appear when those words are spoken in meeting</p>
+</p>
+</br>
+
 :warning: The app is in pre-release now, so feel free test it and create some issues so we can make it bulletproof before publishing on the chrome store.
 
-</br>
-<img src="https://i.imgur.com/7EjDcuR.png" alt="Success Home Popup" />
-</br>
+## Motivation (User Story)
 
-## Motivation
-
-This is just a pet project I made to know how Chrome extensions work (which proved to be very valuable). So use it at your own risk, as if you get caught while slacking off at work meetings, I won't be held responsible.
+This is a pet project I made to know how Chrome extensions work (which proved to be very valuable 😅). You can use it at your own risk, as if you get caught while slacking off at work meetings, I won't be held responsible.
 
 ## When is this going to be live?
 
