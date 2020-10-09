@@ -40,7 +40,7 @@ This is a pet project I made to know how Chrome extensions work (which proved to
 
 ## How to install the latest version?
 
-First off, download `alert-me-v0.1.0.zip` asset from the [releases](https://github.com/heytulsiprasad/alert-me-google-meet/releases) section.
+First off, download latest zip asset from the [releases](https://github.com/heytulsiprasad/alert-me-google-meet/releases) section.
 
 Once downloaded, unzip the file and open Google Chrome. You can go inside **Menu > More Tools > Extensions** or visit `chrome://extensions`. Then toggle the **Developer Mode** button.
 
