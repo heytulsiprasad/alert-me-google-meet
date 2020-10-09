@@ -38,16 +38,6 @@ A Chrome Extension that notifies people when certain words are being spoken in a
 
 This is a pet project I made to know how Chrome extensions work (which proved to be very valuable 😅). You can use it at your own risk, as if you get caught while slacking off at work meetings, I won't be held responsible.
 
-## When is this going to be live?
-
-Sure, I'll probably test it a bit more on large meet rooms. I'm planning to roll out a intro video on how to use it, let's see how that goes.
-
-I'll also have to submit it for verification to chrome web store so let's say give or take 3-4 days.
-
-## Can I test it?
-
-Absolutely. I'd love you to do it. I'll share steps how you can install this now. Make sure to create issues if you come across any bugs, its always better to discuss tech in public.
-
 ## How to install the latest version?
 
 First off, download `alert-me-v0.1.0.zip` asset from the [releases](https://github.com/heytulsiprasad/alert-me-google-meet/releases) section.
