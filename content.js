@@ -77,7 +77,7 @@ try {
     // Invoke after call starts
     // -------------------------------------------------------------------------
     const callStarts = () => {
-      const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
+      const subtitleDiv = document.querySelector("div[jscontroller='TEjq6e']");
 
       // To notify the first time
       IS_SUBTITLE_ON = subtitleDiv.style.display === "none" ? false : true;
@@ -127,7 +127,7 @@ try {
       });
 
       // DOM element containing all subtitles
-      const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
+      const subtitleDiv = document.querySelector("div[jscontroller='TEjq6e']");
 
       const subtitleObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
