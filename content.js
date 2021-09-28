@@ -180,6 +180,8 @@ try {
                     // Send notif alert to background.js
                     chrome.runtime.sendMessage("", {
                       type: "notification",
+                      alert_word: ALERT_WORDS[i],
+                      speaker: speaker,
                       options: {
                         title: "Alert — from Google Meet",
                         message: `${speaker} just said ${speech}`,
