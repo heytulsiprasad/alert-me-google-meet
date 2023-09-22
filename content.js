@@ -77,7 +77,7 @@ try {
     // Invoke after call starts
     // -------------------------------------------------------------------------
     const callStarts = () => {
-      const subtitleDiv = document.querySelector("div[jscontroller='TEjq6e']");
+      const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
 
       // To notify the first time
       IS_SUBTITLE_ON = subtitleDiv.style.display === "none" ? false : true;
@@ -134,7 +134,6 @@ try {
           const newNodes = mutation.addedNodes;
 
           newNodes.forEach((node) => {
-            if (node.classList && node.classList.contains("CNusmb")) {
               const speaker = node?.parentNode?.parentNode?.parentNode?.parentNode?.querySelector(
                 ".zs7s8d.jxFHg"
               )?.textContent;
@@ -202,7 +201,6 @@ try {
                   }, 3000);
                 }
               }
-            }
           });
         });
       });
