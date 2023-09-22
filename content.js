@@ -127,7 +127,7 @@ try {
       });
 
       // DOM element containing all subtitles
-      const subtitleDiv = document.querySelector("div[jscontroller='TEjq6e']");
+      const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
 
       const subtitleObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
